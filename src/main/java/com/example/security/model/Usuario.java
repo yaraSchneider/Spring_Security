@@ -1,12 +1,9 @@
 package com.example.security.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.security.security.model.entidy.UsuarioAutentication;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -18,6 +15,12 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String usuario;
-    private String senha;
+    private String email;
+    private String endereco;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private UsuarioAutentication usuarioAutentication;
+
 }
+
+

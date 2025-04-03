@@ -1,8 +1,9 @@
 package com.example.security.security.service;
 
 import com.example.security.model.Usuario;
+import com.example.security.model.entity.UsuarioCompleto;
+import com.example.security.repository.UsuarioCompletoRepository;
 import com.example.security.repository.UsuarioRepository;
-import com.example.security.security.UserAdapter;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,7 +18,7 @@ public class AtunticacaoService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByUsuario(username).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
-        return new UserAdapter(usuario);
+        Usuario usuario = usuarioRepository.findByUsuarioAutentication_Username(username).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+        return usuario.getUsuarioAutentication();
     }
 }
