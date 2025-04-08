@@ -42,8 +42,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
        httpSecurity.formLogin(config -> config.disable());
        httpSecurity.csrf(config -> config.disable());
+       httpSecurity.httpBasic(config -> config.disable());
+       httpSecurity.logout(config -> config.disable());
        httpSecurity.authorizeHttpRequests(config -> {
-           config.requestMatchers(HttpMethod.POST, "api/auth/login", "api/auth/logauot").authenticated();
+           config.requestMatchers(HttpMethod.POST, "api/auth/login", "api/auth/logauot").permitAll().anyRequest().authenticated();
        });
        return httpSecurity.build();
     }
